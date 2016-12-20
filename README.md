@@ -1,2 +1,5 @@
-# montecarlo
-Monte Carlo simulation running in a OCaml web worker
+Stock portfolio Monte Carlo simulation
+
+- [x] OCaml / bucklescript
+- [x] web components
+- [x] web worker

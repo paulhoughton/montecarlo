@@ -1,0 +1,6 @@
+{
+    "name" : "monteCarlo",
+    "sources" : { 
+        "dir" :  "src"
+    }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="src/style.css">
+  <script src="https://unpkg.com/@webcomponents/custom-elements"></script>
+  <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+  <script src="src/mdl-components.js"></script>
+  <title>Stock Portfolio Monte Carlo Simulation</title>
+</head>
+
+<body>
+  <header class="mdl-layout__header mdl-color--primary">
+    <div class="mdl-layout__header-row">
+      <h3>Monte Carlo Portfolio Simulation</h3>
+    </div>
+  </header>
+  <div class="mdl-grid">
+    <mdl-cell data-cols="2" data-title="Cycles" data-tooltip="Number of times to run the simulation">
+      <select id="inputRepeated"><option selected>100000</option><option>1000000</option><option>10000000</option></select>
+    </mdl-cell>
+    <mdl-cell data-cols="2" data-title="Investment" data-tooltip="Initial investment amount">
+      <input type="number" id="inputInvestment" value="10000" />
+    </mdl-cell>
+    <mdl-cell data-cols="1" data-title="Years" data-tooltip="Length of time to hold portfolio">
+      <select id="inputYears"><option>10</option><option>20</option><option selected>30</option></select>
+    </mdl-cell>
+    <mdl-cell data-cols="3" data-title="Volatitlity" data-tooltip="Level of risk">
+      <mdl-slider data-id="inputVolatility" data-max="20" data-default="5"></mdl-slider>
+    </mdl-cell>
+    <mdl-cell data-cols="3" data-title="Avg Return" data-tooltip="Expected return">
+      <mdl-slider data-id="inputAvgReturn" data-max="20" data-default="5"></mdl-slider>
+    </mdl-cell>
+    <mdl-cell data-cols="1" class="mdl-cell--middle">
+      <button class="mdl-button mdl-js-button mdl-button--colored mdl-button--raised" id="btnRun">Run</button>
+    </mdl-cell>
+    <mdl-cell data-cols="11">
+      <div id="progress" class="mdl-progress mdl-js-progress"></div>
+    </mdl-cell>
+    <mdl-cell data-cols="1">
+      <div id="result"></div>
+    </mdl-cell>
+  </div>
+  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+      <tr>
+        <th>Cycles</th>
+        <th>Investment</th>
+        <th>Years</th>
+        <th>Volatility %</th>
+        <th>Average Return %</th>
+        <th>Mean Outcome</th>
+        <th>Range</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <script src="src/app.js"></script>
+</body>
+</html>
