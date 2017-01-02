@@ -25,10 +25,22 @@ class mdlCell extends HTMLElement {
 
 class mdlSlider extends HTMLElement {
   connectedCallback(){
-    const id = this.dataset.id
-    this.innerHTML = `<span id="${id}Val" style="float:right">${this.dataset.default}%</span>
-      <input class="mdl-slider mdl-js-slider" id="${id}" type="range" min="${this.dataset.min||1}" max="${this.dataset.max}" value="${this.dataset.default}">` 
-    document.getElementById(id).addEventListener("change", ({ target }) => document.getElementById(id + "Val").textContent = target.value+"%")
+    this.val = document.createElement("span")
+    this.val.style.float = "right"
+    this.val.textContent = this.dataset.default + "%"
+
+    this.appendChild(this.val)
+
+    const input = document.createElement("input")
+    input.className = "mdl-slider mdl-js-slider"
+    input.id = this.dataset.id
+    input.type = "range"
+    input.min = this.dataset.min||1
+    input.max = this.dataset.max
+    input.value = this.dataset.default
+    input.addEventListener("change", ({ target }) => this.val.textContent = target.value + "%")
+
+    this.appendChild(input)
   }
 }
 
