@@ -1,46 +1,59 @@
 class mdlCell extends HTMLElement {
-  connectedCallback(){
-    this.classList.add("mdl-cell")
-    if (this.dataset.cols) this.classList.add(`mdl-cell--${this.dataset.cols}-col`)
+  connectedCallback() {
 
-    if (!this.dataset.title) return
+    const { title, tooltip, cols } = this.dataset
 
-    const el = document.createElement('h5')
-    el.textContent = this.dataset.title
-    const elTooltip = document.createElement('div')
-    elTooltip.id = "tooltip" + this.dataset.title
-    elTooltip.className = "icon material-icons"
-    elTooltip.innerText="info_outline"
+    this.classList.add('mdl-cell')
+    if (cols) this.classList.add(`mdl-cell--${cols}-col`)
+
+    if (!title) return
+
+    const el = Object.assign(document.createElement('h5'), { textContent: title })
+    const elTooltip = Object.assign(document.createElement('div'), {
+      id: 'tooltip' + title,
+      className: 'icon material-icons',
+      innerText: 'info_outline'
+    })
     el.appendChild(elTooltip)
 
-    const elTooltipPopup = document.createElement('div')
-    elTooltipPopup.setAttribute("for", "tooltip" + this.dataset.title)
-    elTooltipPopup.className = "mdl-tooltip"
-    elTooltipPopup.textContent = this.dataset.tooltip
+    const elTooltipPopup = Object.assign(document.createElement('div'),
+      {
+        className: 'mdl-tooltip',
+        textContent: tooltip
+      })
+    elTooltipPopup.setAttribute('for', 'tooltip' + title)
+
     el.appendChild(elTooltipPopup)
 
-    this.insertBefore(el,this.children[0])
+    this.insertBefore(el, this.children[0])
   }
 }
 
 class mdlSlider extends HTMLElement {
-  connectedCallback(){
-    this.val = document.createElement("span")
-    this.val.style.float = "right"
-    this.val.textContent = this.dataset.default + "%"
+  connectedCallback() {
 
-    this.appendChild(this.val)
+    const { id, min = '1', max, default: value } = this.dataset
 
-    const input = document.createElement("input")
-    input.className = "mdl-slider mdl-js-slider"
-    input.id = this.dataset.id
-    input.type = "range"
-    input.min = this.dataset.min||1
-    input.max = this.dataset.max
-    input.value = this.dataset.default
-    input.addEventListener("change", ({ target }) => this.val.textContent = target.value + "%")
+    const valueSpan = Object.assign(document.createElement('span'),
+      {
+        style: { cssFloat: 'right' },
+        textContent: value + '%'
+      })
 
-    this.appendChild(input)
+    this.appendChild(valueSpan)
+
+    const inputSlider = Object.assign(document.createElement('input'),
+      {
+        classList: 'mdl-slider mdl-js-slider',
+        type: 'range',
+        id,
+        min,
+        max,
+        value
+      })
+    inputSlider.addEventListener('mouseup', ({ target }) => valueSpan.textContent = target.value + '%')
+
+    this.appendChild(inputSlider)
   }
 }
 
