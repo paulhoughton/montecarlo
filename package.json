@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "description": "Monte Carlo simulation running in a web worker",
   "scripts": {
-    "build": "bsb && rollup -c"
+    "build": "npm run compile && npm run bundle",
+    "bundle": "rollup -f iife -n monte lib/es6_global/src/monte.js -o build/monte.js",
+    "compile": "bsb"
   },
   "license": "MIT",
   "devDependencies": {
-    "bs-platform": "git+https://github.com/bloomberg/bucklescript.git",
-    "rollup": "^0.37.0",
-    "rollup-plugin-commonjs": "^6.0.0",
-    "rollup-plugin-node-resolve": "^2.0.0"
+    "bs-platform": "^1.7.5",
+    "rollup": "^0.43.0"
   }
 }
